@@ -81,21 +81,22 @@ int main()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // // nota: alcune volte dopo la compilazione i path non coincidono
+    // nota: qualche incosistenza con i path a seconda della compilazione
     // char tmp[256];
     // getcwd(tmp, 256);
     // cout << "Current working directory: " << tmp << endl;
-    
+    chdir("../newprog/");
+
     // build and compile shaders
     // ------------------------- 
-    Shader shader("../shaders/shadowShader.vs", "../shaders/shadowShader.fs");
-    Shader simpleDepthShader("../shaders/shadowMappingDepth.vs", "../shaders/shadowMappingDepth.fs");
-    Shader skyboxShader("../shaders/skybox.vs", "../shaders/skybox.fs");
+    Shader shader("shaders/shadowShader.vs", "shaders/shadowShader.fs");
+    Shader simpleDepthShader("shaders/shadowMappingDepth.vs", "shaders/shadowMappingDepth.fs");
+    Shader skyboxShader("shaders/skybox.vs", "shaders/skybox.fs");
 
     // load models
     // -----------
     // nota: funziona ma allunga tantissimo i tempi di caricamento
-    Model myModel("../objects/boot/sh_catWorkBoot.obj");
+    Model myModel("objects/boot/sh_catWorkBoot.obj");
     myModelPtr = &myModel;
     
     // configure depth map FBO
@@ -124,19 +125,19 @@ int main()
 
     // load textures
     // -------------
-    diffuseMap = loadTexture("../textures/container.png");
-    specularMap = loadTexture("../textures/container_specular.png");
-    floorTexture = loadTexture("../textures/metal.png");
-    transparentTexture = loadTexture("../textures/window.png");
+    diffuseMap = loadTexture("textures/container.png");
+    specularMap = loadTexture("textures/container_specular.png");
+    floorTexture = loadTexture("textures/metal.png");
+    transparentTexture = loadTexture("textures/window.png");
 
     std::vector<std::string> faces
     {
-        "../textures/skybox/xpos.jpg", //right
-        "../textures/skybox/xneg.jpg", //left
-        "../textures/skybox/ypos.jpg", //top
-        "../textures/skybox/yneg.jpg", //bottom
-        "../textures/skybox/zpos.jpg", //front
-        "../textures/skybox/zneg.jpg"  //back
+        "textures/skybox/xpos.jpg", //right
+        "textures/skybox/xneg.jpg", //left
+        "textures/skybox/ypos.jpg", //top
+        "textures/skybox/yneg.jpg", //bottom
+        "textures/skybox/zpos.jpg", //front
+        "textures/skybox/zneg.jpg"  //back
     };
     unsigned int cubemapTexture = loadCubemap(faces);
 
